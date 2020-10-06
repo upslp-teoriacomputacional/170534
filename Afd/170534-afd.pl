@@ -1,5 +1,5 @@
 # -----------------------------------------------
-#| 170534-compuertas.pl                           |
+#| 170534-afd.pl                                 |
 #|                                               |
 #|    Nombre: Claudia Alejandra González Ibarra  |
 #| Matrícula: 170534                             |
@@ -10,7 +10,7 @@
 #|      para obtener automatas finitos           |
 #|      deterministas.                           |
 #|                                               |
-#|Fecha: 21 de Septiembre del 2020               |
+#|Fecha: 05 de Octubre del 2020                  |
 # -----------------------------------------------
 
 our $simbolo = "";
@@ -40,18 +40,17 @@ sub encabezado{
 	print("\n|  Edo. Actual | Caracter | Simbolo | Edo. Siguiente  | ");
 	body();
 }
+
 sub contenido{
 	my ($estadosig, $character, $simbolo, $estado) = @_;
-	#print ("\n|	",$_[0],"      | ",$_[1],"| ",$_[2],"	| ",$_[3],"	|");
 	print ("\n|	",$_[0],"	| ",$_[1],"	| ",$_[2],"	| ",$_[3],"	| ");
 	body();
 }
+
 sub body{
 	print("\n+------------+--------------+-------------+-----------+");
 }
 
-
-#MAIN
 my @tabla= ([1,"E","E"],["E",2,"E"],[3,"E","E"],["E","E","A"]);
 my $estado = 0;
 $simbolo="hola";
