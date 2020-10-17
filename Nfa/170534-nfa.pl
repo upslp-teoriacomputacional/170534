@@ -50,7 +50,7 @@ sub contenido{
 sub body{
 	print("\n+------------+--------------+-------------+-----------+");
 }
-
+#Referencia de la tabla Juan Humberto :)
 my @tabla= ([1,"E","E","E"],     #q0
             ["E",2,"E","E"],     #q1
 			[3,"E",3,"E"],     #q2
@@ -95,9 +95,6 @@ for my $character (@cadena){
 	}
 	contenido($estadosig,$character,$simbolo,$estado);
 }
-
-#al concluir si el estado no es 3 que es el de aceptacion imprimimos cadena no valida    
-
 
 if($estado == 4){
         print("\n|              Cadena No Valida :(                   |\n+----------------------------------------------------+");
