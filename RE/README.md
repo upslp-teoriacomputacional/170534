@@ -3,66 +3,72 @@ Programa en Perl para realizar Automatas finitos no deterministas
 
 ##### Nombre: Claudia Alejandra González Ibarra
 ##### Matrícula: 170534
-##### Fecha: 16 de Octubre del 2020
+##### Fecha: 23 de Octubre del 2020
 
-El objetivo principal del programa es generar un NFA, es decir, analizar una cadena que satisfaga la expresión regular *a*ba**, es decir, que pueden existir **n** cantidad de a, en seguida tendremos la ab y por último obtendremos **n** cantidad de a.
+El objetivo principal del programa es generar grámatica regular, es decir, un analizador léxico. La entrada que le vamos a dar al programa será la siguiente: 
+**bool claus = 23;**. Aunque ya con el programa se pueden asignar otras entradas.
 
-Un autómata finito no determinista (abreviado AFND) es un autómata finito que, a diferencia de los autómatas finitos deterministas (AFD), posee al menos un estado q ∈ Q, tal que para un símbolo a ∈ Σ del alfabeto, existe más de una transición δ(q,a) posible.
+###### Ejemplos:
+* int result = 100;
+* int algo * 1;
 
-En un AFND puede darse cualquiera de estos dos casos:
- * Que existan transiciones del tipo δ(q,a)=q1 y δ(q,a)=q2, siendo q1 ≠ q2;
- * Que existan transiciones del tipo δ(q, ε), siendo q un estado no-final, o bien un estado final pero con transiciones hacia otros estados.
+El analizador léxico. Se encarga de buscar los componentes léxicos o palabras que componen el programa fuente, según unas reglas o patrones. La entrada del analizador léxico podemos definirla como una secuencia de caracteres.
+
+El analizador tiene que dividir la secuencia de caracteres en palabras con significado propio y después convertirlo a una secuencia de terminales desde el punto de vista del analizador sintáctico, ya que es su entrada. 
+![Analizador léxico](https://github.com/upslp-teoriacomputacional/170534/blob/master/RE/imagenes/Analizador_lex.jpg)
 
 Acerca de la programación...
 -----------------------------
 ##### Declaración de variables
-* En esta ocasión solo se usarán letras, en especial la *a* y *b* ya que así es como lo muestra la expresión regular.
+En esta ocasión vamos a manejar 4 expresiones regulares:
 ```perl
-$_[0] eq "a" /
-$simbolo = "a";
+$word =~ m/str|int|bool/   # Va a reconocer si la entrada es str, int, bool
+$word =~ m/[a-z|A-Z]/      # Va a reconocer si la entrada esta formada por letras
+$word =~ m/[\+\-\/\*\=\%]/ # Va a reconocer si dentro de la entrada hay un operador
+$word =~ m/[0-9]/          # Va a reconocer si la entrada es de puro números
 ```
 * Requerimientos globales:
 Se declararán las variables globales ya que se usarán en todo el código por ende todas las funciones harán uso de ellas.
-Nuestro código se divide en diferentes funciones como:
-* Encabezado: el cual solo imprimirá la parte Inicial de la tabla, es decir, los títulos de cada columna de la tabla.
-* Contenido: va a imprimir el valor de las variables y con esto poder llenar nuestra tabla.
 ```perl
-my ($estadosig, $character, $simbolo, $estado) = @_;
-	print ("\n|	",$_[0],"	| ",$_[1],"	| ",$_[2],"	| ",$_[3],"	| ");
-	body();
+my @tokens=();
+my $entrada = 'bool claus = 23;';
 ```
 
 #### Solución del programa...
-* En este programa se tiene que analizar la tabla de la creación del automata, ya que esto dará la funcionabilidad 
-del este
+* Uno de los pasos importantes para resolver el programa fue el uso del método **split()**, ya que nos ayudará a convertir nuestra entrada a un tipo de lista de palabras.
 ```perl
-my @tabla= ([1,"E","E","E"],     #q0
-            ["E",2,"E","E"],     #q1
-	    [3,"E",3,"E"],       #q2
-	    [4,"E","E","E"],     #q3
-	    ["E","E","E","A"]);  #q4
-my $estado = 0;
+my $entrada = 'bool claus = 23;';
+my @source_code =  split (' ', $entrada) ;
 ```
->En lo personal no es la solución correcta pero es la forma en que a mi me funcionaron algunas cosas
-* En si no está del todo la solución pero genera la mitad de las cadenas que se pueden meter en el programa.
-
-* Es la sintaxis para la impresión de la tabla:
+#### Código 
 ```perl
-if ($charcaracter == 0){
-        $simbolo = " a";
-        if ($estado == 0){
-            $estadosig = 1;
-        }   
-    }
-    if($charcaracter == 1){
-        $simbolo = " b";
-    }     
-    if($charcaracter == 2){
-        $simbolo = "Fin";
-    }
+foreach my $word (@source_code){
+    
+    # Se comprobará el tipo de dato de nuestra entrada
+    if ($word =~ m/str|int|bool/){        
+		push (@tokens, "['DATATYPE', '$word'}");
+    # Se busca un identificador 
+    }elsif($word =~ m/[a-z|A-Z]/){		       
+		push (@tokens, "['IDENTIFIER', '$word'}");
+    # Se comprueba el operador
+    }elsif($word =~ m/[\+\-\/\*\=\%]/){        
+		push (@tokens, "['OPERATOR', '$word'}");
+    # busca los números enteros
+    }elsif ($word =~ m/[0-9]/){	
+		my @wd2 = $word; 	
+		if(@wd2[length(@wd2)-1] =~ /;/){
+			my $intr = substr($word,0,-1);
+			push (@tokens, "['INTEGER', '$intr']");
+			push (@tokens, "['END STATEMENT', ';']");
+		}else{			   
+		   push (@tokens, "['INTEGER', '$word']");
+		}	
+	}
+}
 ```
-> Nos ayudara a seguir al siguiente estado
+> Otro punto clave fue el método substr() nos ayudará a devolver el número entero sin el punto y coma (;).
 
+* En el lenguaje de programación Perl tiene integrada la función de substr(). Esta función se utiliza cuando se trabaja con cadenas. Con esta función se puede obtener parte de la cadena, o de reemplazar parte de una cadena con otra cadena de caracteres.
 
 #### Información personal:
 ----------------------------
