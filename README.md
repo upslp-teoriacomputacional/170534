@@ -1,168 +1,74 @@
-# Instructions
-1. Program in the assigned programming language (F #, Perl, Rust)
-2. The programs are located in the (source_code) folder.
-3. The code must be compiled on any operating system.
-4. The code is uploaded at https://github.com/upslp-teoriacomputacional/matricula
-5. Example. 00180864_sets. go
-6. The program will be evaluated according to the rubric attached.
-7. The evidence of the developed program is the template of the commented source code.
-8. You can also show the operation of the programs in the beginning or term of class before the deadline.
+Programa en Perl para realizar Automatas finitos no deterministas
+===================================================================
 
-## Rubric
----
-#### Functionality:
-The program works correctly and all the input variables are validated.
-#### Logic reasoning:
-It is a very refined compact code.
-#### Code structuring:
-If you use indentation, spaces and line spacing that gives greater clarity.
-#### Documentation:
-The presentation includes the name, surname, major, name of the specialty professor, name of the institution and enrollment, well-defined objectives documented and parts of the well-documented code.
----
+##### Nombre: Claudia Alejandra González Ibarra
+##### Matrícula: 170534
+##### Fecha: 16 de Octubre del 2020
 
-### Help -?
-#### <li><em>Programming Languages doc comments.</em>
+El objetivo principal del programa es generar un NFA, es decir, analizar una cadena que satisfaga la expresión regular *a*ba**, es decir, que pueden existir **n** cantidad de a, en seguida tendremos la ab y por último obtendremos **n** cantidad de a.
 
-##### <a href = "https://fsharp.org/learn/">writing F# comments</a>.
+Un autómata finito no determinista (abreviado AFND) es un autómata finito que, a diferencia de los autómatas finitos deterministas (AFD), posee al menos un estado q ∈ Q, tal que para un símbolo a ∈ Σ del alfabeto, existe más de una transición δ(q,a) posible.
 
+En un AFND puede darse cualquiera de estos dos casos:
+ * Que existan transiciones del tipo δ(q,a)=q1 y δ(q,a)=q2, siendo q1 ≠ q2;
+ * Que existan transiciones del tipo δ(q, ε), siendo q un estado no-final, o bien un estado final pero con transiciones hacia otros estados.
 
-##### <a href = "https://perldoc.perl.org/perl.html"> writing Perl comments</a>.
+Acerca de la programación...
+-----------------------------
+##### Declaración de variables
+* En esta ocasión solo se usarán letras, en especial la *a* y *b* ya que así es como lo muestra la expresión regular.
+```perl
+$_[0] eq "a" /
+$simbolo = "a";
+```
+* Requerimientos globales:
+Se declararán las variables globales ya que se usarán en todo el código por ende todas las funciones harán uso de ellas.
+Nuestro código se divide en diferentes funciones como:
+* Encabezado: el cual solo imprimirá la parte Inicial de la tabla, es decir, los títulos de cada columna de la tabla.
+* Contenido: va a imprimir el valor de las variables y con esto poder llenar nuestra tabla.
+```perl
+my ($estadosig, $character, $simbolo, $estado) = @_;
+	print ("\n|	",$_[0],"	| ",$_[1],"	| ",$_[2],"	| ",$_[3],"	| ");
+	body();
+```
 
+#### Solución del programa...
+* En este programa se tiene que analizar la tabla de la creación del automata, ya que esto dará la funcionabilidad 
+del este
+```perl
+my @tabla= ([1,"E","E","E"],     #q0
+            ["E",2,"E","E"],     #q1
+	    [3,"E",3,"E"],       #q2
+	    [4,"E","E","E"],     #q3
+	    ["E","E","E","A"]);  #q4
+my $estado = 0;
+```
+>En lo personal no es la solución correcta pero es la forma en que a mi me funcionaron algunas cosas
+* En si no está del todo la solución pero genera la mitad de las cadenas que se pueden meter en el programa.
 
-##### <a href = "https://www.rust-lang.org/learn"> writing Rust comments</a>.
-
-
-
-### Writing Clear Code
-
-The overarching goal when writing code is to make it easy to read and to understand. Well-written programs are easier to debug, easier to maintain, and have 
-fewer errors. Writing a program is a lot like writing an essay. When writing an essay, your message is more convincing when it is accompanied by proper grammar and punctuation. When writing computer programs, you should follow the same principle. It is even more important when programming since someone may be assigned to maintain and support your code for long periods of time. You will appreciate the importance of good style when it is your task to understand and maintain someone else's code!
-
-#### Commenting
-
-Example
-<table>
-<TR><TD><pre>
-/*---------------------------------------------------------
- *  Here is a block comment that draws attention
- *  to itself.
- *---------------------------------------------------------*/
-</pre></td></tr>
-</table>
-
-<table>
-<TR><TD><pre>
-/* *****************************************************************************
- *  Name:    Alan Turing
- *  NetID:   aturing
- *  Precept: P00
- *
- *  Description:  Prints 'Hello, World' to the terminal window.
- *                By tradition, this is everyone's first program.
- *                Prof. Brian Kernighan initiated this tradition in 1974.
- *
- *  Written:       5/03/1997
- *  Last updated:  8/22/2018
- *
- *  % python 3 HelloWorld.python
- *  % pyton HelloWorld
- *  Hello, World
- *
- **************************************************************************** */
-</pre></td></tr>
-</table>
+* Es la sintaxis para la impresión de la tabla:
+```perl
+if ($charcaracter == 0){
+        $simbolo = " a";
+        if ($estado == 0){
+            $estadosig = 1;
+        }   
+    }
+    if($charcaracter == 1){
+        $simbolo = " b";
+    }     
+    if($charcaracter == 2){
+        $simbolo = "Fin";
+    }
+```
+> Nos ayudara a seguir al siguiente estado
 
 
-<p><li> Comment every important variable name (including 
-all instance variables).
+#### Información personal:
+----------------------------
+*Universidad Politécnica de San Luis Potosí*
 
+Profesor: Juan Carlos González Ibarra 
 
-<table>
-<TR><TD><pre>
-private double rx, ry;    //  position
-private double q;         //  charge
-</pre></td></tr>
-</table>
+Materia: Teoría Computacional
 
-If you prefer, you may use
-<a href = "https://en.wikipedia.org/wiki/Structured_programming">doc comments</a>.
-
-
-<table>
-<TR><TD><pre>
-public static void main(String[] args) { 
-   boolean nesting = true;
-   /* /* */ nesting = false; // */ 
-   System.out.println(nesting);
-} 
-</pre></td></tr>
-</table>
-
-
-<table>
-<TR><TD><pre>
-a*x + b
-</pre></td></tr>
-</table>
-
-
-<table>
-<TR><TD><pre>
-for(int i=0;i&lt;n;i++)    vs.      for (int i = 0; i < n; i++)
-</pre></td></tr>
-</table>
-
-
-<table>
-<TR><TD><pre>
-    //This comment has no space           //  This comment has two 
-    //after the delimiter and is          //  spaces after the delimiter
-    //difficult to read.                  //  and is easier to read.
-</pre></td></tr>
-</table>
-
-
-<table>
-<TR><TD><pre>
-int n      = Integer.parseInt(args[0]);      //  size of population
-int trials = Integer.parseInt(args[1]);      //  number of trials
-</pre></td></tr>
-</table>
-
-
-<table>
-<TR><TD><pre>
-//  K&R style indenting                   
-public static void  main(String[] args) {
-    System.out.println("Hello, World");
-}
-
-//  BSD-Allman style indenting
-public static void main(String[] args)
-{
-    System.out.println("Hello, World");
-}
-</pre></td></tr>
-</table>
-
-
-#### References
-<p><b>A.</b> <a href = "http://www.cs.princeton.edu/~bwk/tpop.webpage">The Practice
-of Programming</a> by Brian W. Kernighan and Rob Pike is a classic.
-
-
-<p><b>A.</b><a href = "http://checkstyle.sourceforge.net/">Checkstyle</a>.
-If you followed our Windows, Mac OS X, or Linux instructions, <em>IntelliJ</em> is configured
-to run Checkstyle automatically while you are editing.
-
-
-<p><b>A.</b><a href = "http://mindprod.com/jgloss/unmain.html">unmaintainable code</a>
-and here's <a href = "http://archive.is/Pn5hH">another</a>.
-
-
-<p></p>
-Don't be afraid of email harvesting, write your email properly and the page will perform programming obfuscation.
-
-<a href="" target="\_blank">@</a> 
-</small>
-</body>
