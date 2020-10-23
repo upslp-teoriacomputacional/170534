@@ -1,4 +1,4 @@
-Programa en Perl para realizar Automatas finitos no deterministas
+Programa en Perl para generar grámatica regular
 ===================================================================
 
 ##### Nombre: Claudia Alejandra González Ibarra
