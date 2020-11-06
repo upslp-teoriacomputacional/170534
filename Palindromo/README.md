@@ -1,67 +1,56 @@
-Programa en Perl para realizar Automatas finitos no deterministas
+Programa en Perl para realizar autómatas de pila
 ===================================================================
 
 ##### Nombre: Claudia Alejandra González Ibarra
 ##### Matrícula: 170534
-##### Fecha: 16 de Octubre del 2020
+##### Fecha: 05 de Noviembre del 2020
 
-El objetivo principal del programa es generar un NFA, es decir, analizar una cadena que satisfaga la expresión regular *a*ba**, es decir, que pueden existir **n** cantidad de a, en seguida tendremos la ab y por último obtendremos **n** cantidad de a.
+Un autómata con pila es un modelo matemático de un sistema que recibe una cadena constituida por símbolos de un alfabeto y determina si esa cadena pertenece al lenguaje que el autómata reconoce. El lenguaje que reconoce un autómata con pila pertenece al grupo de los lenguajes libres de contexto en la clasificación de la Jerarquía de Chomsky.
 
-Un autómata finito no determinista (abreviado AFND) es un autómata finito que, a diferencia de los autómatas finitos deterministas (AFD), posee al menos un estado q ∈ Q, tal que para un símbolo a ∈ Σ del alfabeto, existe más de una transición δ(q,a) posible.
+Un palíndromo es una palabra o frase que se lee igual en un sentido que en otro (por ejemplo, Ana). Si se trata de números en lugar de letras, se llama capicúa. Habitualmente, las frases palindrómicas se resienten en su significado cuanto más largas son.
 
-En un AFND puede darse cualquiera de estos dos casos:
- * Que existan transiciones del tipo δ(q,a)=q1 y δ(q,a)=q2, siendo q1 ≠ q2;
- * Que existan transiciones del tipo δ(q, ε), siendo q un estado no-final, o bien un estado final pero con transiciones hacia otros estados.
+* Ejemplo de palíndromo: **"Anula la luz azul a la luna"**
 
 Acerca de la programación...
 -----------------------------
 ##### Declaración de variables
-* En esta ocasión solo se usarán letras, en especial la *a* y *b* ya que así es como lo muestra la expresión regular.
+* Para pedir la cadena y así poder seguir con el programa, se declará de la siguiente manera:
 ```perl
-$_[0] eq "a" /
-$simbolo = "a";
+print ("\n\tIngrese el palindromo: ");  #entrada del palíndromo 
+my $entrada = <STDIN>; 
+$entrada =~ s/\s//g; 
 ```
+> La última línea nos ayudará a quitar los espacios que contenga nuestra cadena de entrada
 * Requerimientos globales:
 Se declararán las variables globales ya que se usarán en todo el código por ende todas las funciones harán uso de ellas.
-Nuestro código se divide en diferentes funciones como:
-* Encabezado: el cual solo imprimirá la parte Inicial de la tabla, es decir, los títulos de cada columna de la tabla.
-* Contenido: va a imprimir el valor de las variables y con esto poder llenar nuestra tabla.
-```perl
-my ($estadosig, $character, $simbolo, $estado) = @_;
-	print ("\n|	",$_[0],"	| ",$_[1],"	| ",$_[2],"	| ",$_[3],"	| ");
-	body();
-```
+Nuestro código se divide en 2 partes fundamentaes, como:
+* Pila: en esta parte vamos a ir agregando los caracteres que forman parte de la entrada *(en este caso el palíndromo)* y a su vez se va a ir agregando letra por letra.
+* Desapilar: en esta parte se hará lo contrario de pila, es decir, se van a ir quitando los elementos hasta que se quede en la primera letra *"a"*.
 
 #### Solución del programa...
-* En este programa se tiene que analizar la tabla de la creación del automata, ya que esto dará la funcionabilidad 
-del este
+* Para la soulción utilice las dos líneas siguientes:
 ```perl
-my @tabla= ([1,"E","E","E"],     #q0
-            ["E",2,"E","E"],     #q1
-	    [3,"E",3,"E"],       #q2
-	    [4,"E","E","E"],     #q3
-	    ["E","E","E","A"]);  #q4
-my $estado = 0;
+my $num = length($entrada);             #cuenta la longitud de la entrada y se le asigna a otra variable
+my $Tpila = ($num/2);                   #se divide la longitud de la cadena para imprimir hasta la mitad el arreglo
 ```
->En lo personal no es la solución correcta pero es la forma en que a mi me funcionaron algunas cosas
-* En si no está del todo la solución pero genera la mitad de las cadenas que se pueden meter en el programa.
+>Así podemos imprimir en la **Pila** hasta la mitad del palíndromo y ver como se desarrolla.
 
-* Es la sintaxis para la impresión de la tabla:
+* Pila:
 ```perl
-if ($charcaracter == 0){
-        $simbolo = " a";
-        if ($estado == 0){
-            $estadosig = 1;
-        }   
-    }
-    if($charcaracter == 1){
-        $simbolo = " b";
-    }     
-    if($charcaracter == 2){
-        $simbolo = "Fin";
-    }
+for (my $i=0; $i<$Tpila; $i++){
+    push(@arreglo1, $arreglo[$i]);      #se van metiendo los valores en el arreglo y así poder imprimir ka primera parte
+    print ("\n@arreglo1");
+}
 ```
-> Nos ayudara a seguir al siguiente estado
+> Con esta función, puede añadir elementos al final de Perl del arreglo.
+* Desapilar:
+```perl
+for (my $j=0; $j<$Tpila; $j++){
+    pop(@arreglo1);                     #se van sacando las letras del arreglo de pila para obtener la segunda parte
+    print ("\n@arreglo1");
+}
+```
+> La función pop eliminará y devolverá el último elemento del arreglo.
 
 
 #### Información personal:
