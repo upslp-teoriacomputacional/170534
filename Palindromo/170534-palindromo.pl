@@ -11,8 +11,8 @@
 #|      manera que haga una pila y en otra       |
 #|      desapile.                                |
 #|                                               |
-#|Fecha: 23 de Octubre del 2020                  |
-#|Actualización: 23 de Octubre del 2020          |
+#|Fecha: 03 de Noviembre del 2020                |
+#|Actualización: 05 de Noviembre del 2020        |
 # -----------------------------------------------
 use strict;
 use warnings;
