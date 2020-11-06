@@ -11,6 +11,10 @@ Un palíndromo es una palabra o frase que se lee igual en un sentido que en otro
 
 * Ejemplo de palíndromo: **"Anula la luz azul a la luna"**
 
+* Autómata de pila:
+
+![Autómata de pila](https://github.com/upslp-teoriacomputacional/170534/blob/master/Palindromo/Imagenes/automata_pila.JPG)
+
 Acerca de la programación...
 -----------------------------
 ##### Declaración de variables
@@ -52,6 +56,7 @@ for (my $j=0; $j<$Tpila; $j++){
 ```
 > La función pop eliminará y devolverá el último elemento del arreglo.
 
+![Ejemplo 1](https://github.com/upslp-teoriacomputacional/170534/blob/master/Palindromo/Imagenes/ejemplo1.png)
 
 #### Información personal:
 ----------------------------
