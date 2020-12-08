@@ -34,6 +34,7 @@ for (my $i=0; $i<$Tpila; $i++){
     print ("\n@arreglo1");
 }
 
+
 print ("\n\nDesapilar: ");
 for (my $j=0; $j<$Tpila; $j++){
     pop(@arreglo1);                     #se van sacando las letras del arreglo de pila para obtener la segunda parte
